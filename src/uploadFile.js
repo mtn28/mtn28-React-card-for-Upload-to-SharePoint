@@ -3,7 +3,7 @@ export const uploadFile = async (files, email, parentFolderId, token) => {
     return { success: false, error: 'No files selected for upload.' };
   }
 
-  const batchSize = 10; // Pode ajustar o tamanho do batch conforme necessário
+  const batchSize = 100; // Pode ajustar o tamanho do batch conforme necessário
   const results = [];
 
   for (let i = 0; i < files.length; i += batchSize) {
