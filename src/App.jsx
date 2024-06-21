@@ -118,7 +118,7 @@ function App() {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container" style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
       <Container maxWidth="md" className="mt-5">
         <Paper elevation={6} className="paper-container scale-down" style={paperStyle}>
           <Box display="flex" justifyContent="space-between" alignItems="center" style={{ position: 'relative' }}>
@@ -157,7 +157,7 @@ function App() {
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <TextField
                   fullWidth
-                  label="HubSpot Object ID:"
+                  label="Folder ID:"
                   variant="outlined"
                   value={hubspotObjectId}
                   onChange={(e) => setHubspotObjectId(e.target.value)}
