@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import {
@@ -17,8 +18,9 @@ import {
   IconButton,
   Snackbar,
   Alert,
+  CircularProgress,
 } from '@mui/material';
-import { CloudUpload as CloudUploadIcon, Delete as DeleteIcon, Publish as PublishIcon } from '@mui/icons-material';
+import { CloudUpload as CloudUploadIcon, Delete as DeleteIcon, Publish as PublishIcon, Cancel as CancelIcon } from '@mui/icons-material';
 import './App.css';
 import { uploadFile } from './uploadFile';
 
@@ -109,6 +111,11 @@ function App() {
     setFiles(files.filter((f) => f.path !== file.path));
   };
 
+  const handleCancelUpload = () => {
+    setIsUploading(false);
+    setIsButtonClicked(false);
+  };
+
   const handleCloseAlert = () => {
     setAlert({ ...alert, open: false });
   };
@@ -118,7 +125,7 @@ function App() {
   };
 
   return (
-    <div className="main-container" style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
+    <div className="main-container">
       <Container maxWidth="md" className="mt-5">
         <Paper elevation={6} className="paper-container scale-down" style={paperStyle}>
           <Box display="flex" justifyContent="space-between" alignItems="center" style={{ position: 'relative' }}>
@@ -193,19 +200,14 @@ function App() {
                   {isUploading ? 'Uploading...' : 'Upload'}
                 </Button>
               </Grid>
-              <Grid item style={{ marginLeft: 'auto' }}>
-                <Box style={{ display: 'flex', gap: '10px', margin: '10px' }}>
-                  <a href="https://www.microsoft.com" target="_blank" rel="noopener noreferrer">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Microsoft_logo_-_2012_%28vertical%29.svg" alt="Microsoft" className="icon" />
-                  </a>
-                  <a href="https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration" target="_blank" rel="noopener noreferrer">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Microsoft_Office_SharePoint_%282019%E2%80%93present%29.svg" alt="SharePoint" className="icon" />
-                  </a>
-                  <a href="https://www.hubspot.com" target="_blank" rel="noopener noreferrer">
-                    <img src="https://i.pinimg.com/originals/68/9a/ba/689abaa7ca6cdf1f95c768ef4af64001.png" alt="HubSpot" className="icon" />
-                  </a>
-                </Box>
-              </Grid>
+              {isUploading && (
+                <Grid item style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
+                  <CircularProgress size={35} style={{ color: '#ff5722' }} />
+                  <IconButton onClick={handleCancelUpload} style={{ marginLeft: '5px' }} className="icon">
+                    <CancelIcon />
+                  </IconButton>
+                </Grid>
+              )}
             </Grid>
 
             <Grid item xs={12}>

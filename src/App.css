@@ -157,3 +157,14 @@ button:focus {
   transform: scale(0.80); /* Scale down the card to 80% of its original size */
   transform-origin: center; /* Ensure the scaling is from the center */
 }
+
+.icon {
+  height: 24px;
+  width: 24px;
+  transition: transform 0.3s;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+  
