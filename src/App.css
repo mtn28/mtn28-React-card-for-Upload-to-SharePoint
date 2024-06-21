@@ -25,7 +25,8 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(transparent, rgba(201, 66, 66, 0.2), transparent);
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: rotateBG 6s linear infinite, pulseBG 6s ease-in-out infinite;
   z-index: 1;
 }
 
@@ -56,21 +57,12 @@
   width: 100%;
   margin: 20px;
   padding: 20px; /* Adicionar padding para manter o espaçamento interno */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.8);
   border-radius: 15px;
   background: white;
-  animation: backgroundAnimation 1000000000000s infinite alternate;
   z-index: 2;
   position: relative;
 }
-
-  @keyframes backgroundAnimation {
-    0% {
-      background: linear-gradient(135deg,#a7d3fd, #ffd7cb, #b6fdff);
-    }
-  }
-
-
 
 /* Dropzone styles */
 .dropzone:hover {
@@ -78,7 +70,7 @@
 }
 
 .dropzone:active {
-  background-color: #ff7043; /* Darker orange for HubSpot */
+  background-color: #ff7043; /* Darker orange for HubSpot */  
 }
 
 .dropzone.uploading {
@@ -87,7 +79,7 @@
 
 /* Button styles */
 .buttonClicked {
-  border: 2px solid #3f979d !important;
+  border: 2px solid #2a6c71 !important;
   outline: none !important; /* Remove default outline */
 }
 
@@ -197,5 +189,3 @@ button:focus {
   align-items: center;
   justify-content: center;
 }
-
-

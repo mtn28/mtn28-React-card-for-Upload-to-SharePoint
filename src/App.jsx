@@ -193,7 +193,7 @@ function App() {
                     onClick={handleUpload}
                     startIcon={<PublishIcon />}
                     className={isButtonClicked ? 'buttonClicked' : ''}
-                    style={buttonStyle}
+                    style={{ ...buttonStyle, backgroundColor: '#2a6c71', textTransform: 'none' }}
                     disabled={isUploading}
                   >
                     {isUploading ? 'Uploading...' : 'Upload'}
@@ -307,15 +307,13 @@ const dropzoneStyle = {
   textAlign: 'center',
   cursor: 'pointer',
 };
-  
+
 const buttonStyle = {
-  marginTop: '1rem',
-  padding: '0.75rem 1.5rem',
+  marginTop: '0rem',
+  padding: '0.50rem 1.5rem',
   fontSize: '1rem',
-  backgroundColor: '#3f979d',
+  backgroundColor: '#2a6c71',  // Cor do botão de upload
   color: '#fff',
 };
-
-
 
 export default App;
