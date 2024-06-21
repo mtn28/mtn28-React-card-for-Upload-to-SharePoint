@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import {
@@ -18,7 +17,6 @@ import {
   IconButton,
   Snackbar,
   Alert,
-  CircularProgress,
 } from '@mui/material';
 import { CloudUpload as CloudUploadIcon, Delete as DeleteIcon, Publish as PublishIcon, Cancel as CancelIcon } from '@mui/icons-material';
 import './App.css';
@@ -125,7 +123,7 @@ function App() {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container" style={{ maxHeight: '100vh', overflowY: 'scroll', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Container maxWidth="md" className="mt-5">
         <Paper elevation={6} className="paper-container scale-down" style={paperStyle}>
           <Box display="flex" justifyContent="space-between" alignItems="center" style={{ position: 'relative' }}>
@@ -188,28 +186,44 @@ function App() {
 
             <Grid container item xs={12} style={{ display: 'flex', alignItems: 'center' }}>
               <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleUpload}
-                  startIcon={<PublishIcon />}
-                  className={isButtonClicked ? 'buttonClicked' : ''}
-                  style={buttonStyle}
-                  disabled={isUploading}
-                >
-                  {isUploading ? 'Uploading...' : 'Upload'}
-                </Button>
+                <Box display="flex" alignItems="center">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleUpload}
+                    startIcon={<PublishIcon />}
+                    className={isButtonClicked ? 'buttonClicked' : ''}
+                    style={buttonStyle}
+                    disabled={isUploading}
+                  >
+                    {isUploading ? 'Uploading...' : 'Upload'}
+                  </Button>
+                  {isUploading && (
+                    <>
+                      <div className="custom-spinner-wrapper" style={{ marginLeft: 15 }}>
+                        <div className="custom-spinner"></div>
+                      </div>
+                      <IconButton onClick={handleCancelUpload} style={{ marginLeft: 5 }}>
+                        <CancelIcon className="cancel-icon" />
+                      </IconButton>
+                    </>
+                  )}
+                </Box>
               </Grid>
-              {isUploading && (
-                <Grid item style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
-                  <CircularProgress size={35} style={{ color: '#ff5722' }} />
-                  <IconButton onClick={handleCancelUpload} style={{ marginLeft: '5px' }} className="icon">
-                    <CancelIcon />
-                  </IconButton>
-                </Grid>
-              )}
+              <Grid item style={{ marginLeft: 'auto' }}>
+                <Box style={{ display: 'flex', gap: '10px', margin: '8px' }}>
+                  <a href="https://www.microsoft.com" target="_blank" rel="noopener noreferrer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Microsoft_logo_-_2012_%28vertical%29.svg" alt="Microsoft" className="icon" />
+                  </a>
+                  <a href="https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration" target="_blank" rel="noopener noreferrer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Microsoft_Office_SharePoint_%282019%E2%80%93present%29.svg" alt="SharePoint" className="icon" />
+                  </a>
+                  <a href="https://www.hubspot.com" target="_blank" rel="noopener noreferrer">
+                    <img src="https://i.pinimg.com/originals/68/9a/ba/689abaa7ca6cdf1f95c768ef4af64001.png" alt="HubSpot" className="icon" />
+                  </a>
+                </Box>
+              </Grid>
             </Grid>
-
             <Grid item xs={12}>
               <div
                 {...getRootProps({ className: `dropzone ${isUploading ? 'uploading' : ''}` })}
@@ -276,9 +290,10 @@ function App() {
 
 const paperStyle = {
   borderRadius: '10px',
-  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.9)', // Ajustar a sombra conforme necessário
   position: 'relative',
   backgroundColor: '#f5f8fa',
+  padding: '2rem', // Adicionado padding para melhor estética
 };
 
 const textFieldStyle = {
@@ -292,7 +307,7 @@ const dropzoneStyle = {
   textAlign: 'center',
   cursor: 'pointer',
 };
-
+  
 const buttonStyle = {
   marginTop: '1rem',
   padding: '0.75rem 1.5rem',
@@ -300,5 +315,7 @@ const buttonStyle = {
   backgroundColor: '#3f979d',
   color: '#fff',
 };
+
+
 
 export default App;
