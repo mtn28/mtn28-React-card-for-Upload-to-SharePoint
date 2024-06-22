@@ -26,19 +26,14 @@
   width: 200%;
   height: 200%;
   background: linear-gradient(transparent, rgba(255, 255, 255, 0.2), transparent);
-  animation: rotateBG 6s linear infinite, pulseBG 6s ease-in-out infinite;
+  /* Removed the rotateBG animation */
+  animation: pulseBG 6s ease-in-out infinite;
   z-index: 1;
 }
 
-@keyframes rotateBG {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+/* Removed the rotateBG keyframes */
 
+/* Keyframes for pulseBG */
 @keyframes pulseBG {
   0% {
     opacity: 0.6;
