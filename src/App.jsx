@@ -64,7 +64,7 @@ function App() {
     }
 
     if (!hubspotObjectId) {
-      errorMessages.push('HubSpot Object ID is required.');
+      errorMessages.push('Folder ID is required.');
     }
 
     if (email && !validateEmail(email)) {
@@ -72,7 +72,7 @@ function App() {
     }
 
     if (hubspotObjectId && !validateObjectId(hubspotObjectId)) {
-      errorMessages.push('Invalid HubSpot Object ID.');
+      errorMessages.push('Invalid Folder ID.');
     }
 
     if (files.length === 0) {
@@ -94,7 +94,7 @@ function App() {
       setFiles([]); // Limpa a lista de arquivos após upload bem-sucedido
     } else {
       if (result.error.includes('In alternative, you are not authenticated or your session has expired. Please log in again using the Microsoft authentication extension card.')) {
-        setSecondAlert({ open: true, severity: 'error', message: 'Upload failed. Please check your email and ID.' });
+        setSecondAlert({ open: true, severity: 'error', message: 'Upload failed. Please check your email and Folder ID.' });
         setAlert({ open: true, severity: 'error', message: result.error });
       } else {
         setAlert({ open: true, severity: 'error', message: result.error });
