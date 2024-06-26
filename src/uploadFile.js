@@ -43,7 +43,7 @@ export const uploadFile = async (files, email, parentFolderId, token) => {
       }
     } catch (error) {
       console.error('Error uploading batch:', error);
-      if (error.message.includes('Failed to festch')) {
+      if (error.message.includes('Failed to fetch')) {
         return { success: false, error: 'Authentication failed. Please log in again through the Microsoft authentication extension card.' };
       }
       return { success: false, error: 'Upload failed. Please check your email and ID.' };

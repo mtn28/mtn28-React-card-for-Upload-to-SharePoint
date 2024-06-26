@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import {
   Button,
-  TextField,
   Typography,
   Container,
   Grid,
@@ -29,20 +28,8 @@ const formatFileSize = (size) => {
   else return `${(size / 1073741824).toFixed(2)} GB`;
 };
 
-const validateEmail = (email) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-};
-
-const validateObjectId = (id) => {
-  const re = /^[0-9A-Za-z]+$/;
-  return re.test(String(id));
-};
-
 function App() {
   const [files, setFiles] = useState([]);
-  const [email, setEmail] = useState('');
-  const [hubspotObjectId, setHubspotObjectId] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [alert, setAlert] = useState({ open: false, severity: '', message: '' });
@@ -59,22 +46,6 @@ function App() {
   const handleUpload = async () => {
     let errorMessages = [];
 
-    if (!email) {
-      errorMessages.push('Email is required.');
-    }
-
-    if (!hubspotObjectId) {
-      errorMessages.push('Folder ID is required.');
-    }
-
-    if (email && !validateEmail(email)) {
-      errorMessages.push('Invalid email address.');
-    }
-
-    if (hubspotObjectId && !validateObjectId(hubspotObjectId)) {
-      errorMessages.push('Invalid Folder ID.');
-    }
-
     if (files.length === 0) {
       errorMessages.push('No files selected for upload.');
     }
@@ -87,7 +58,7 @@ function App() {
     setIsButtonClicked(true);
     setIsUploading(true);
 
-    const result = await uploadFile(files, email, hubspotObjectId, accessToken);
+    const result = await uploadFile(files, 'michael.nunes@findmore.eu', '01GPEGV54OW3MOLTIOVBCZWV5QKNYGH6HO', accessToken);
 
     if (result.success) {
       setAlert({ open: true, severity: 'success', message: 'Files uploaded successfully.' });
@@ -136,54 +107,10 @@ function App() {
           </Box>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Email:"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                style={textFieldStyle}
-                InputProps={{
-                  classes: {
-                    root: 'customTextFieldRoot',
-                    focused: 'customTextFieldFocused',
-                    notchedOutline: 'customNotchedOutline',
-                  },
-                }}
-                InputLabelProps={{
-                  classes: {
-                    root: 'customLabelRoot',
-                    focused: 'customLabelFocused',
-                  },
-                }}
-              />
+              <Typography variant="body1" sx={{ color: 'gray', fontSize: '0.980rem'}}>
+                Upload files directly to your personal ID on your Microsoft SharePoint account associated with HubSpot.
+              </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="space-between" alignItems="center">
-                <TextField
-                  fullWidth
-                  label="Folder ID:"
-                  variant="outlined"
-                  value={hubspotObjectId}
-                  onChange={(e) => setHubspotObjectId(e.target.value)}
-                  style={textFieldStyle}
-                  InputProps={{
-                    classes: {
-                      root: 'customTextFieldRoot',
-                      focused: 'customTextFieldFocused',
-                      notchedOutline: 'customNotchedOutline',
-                    },
-                  }}
-                  InputLabelProps={{
-                    classes: {
-                      root: 'customLabelRoot',
-                      focused: 'customLabelFocused',
-                    },
-                  }}
-                />
-              </Box>
-            </Grid>
-
             <Grid container item xs={12} style={{ display: 'flex', alignItems: 'center' }}>
               <Grid item>
                 <Box display="flex" alignItems="center">
@@ -294,10 +221,6 @@ const paperStyle = {
   position: 'relative',
   backgroundColor: '#f5f8fa',
   padding: '2rem', // Adicionado padding para melhor estética
-};
-
-const textFieldStyle = {
-  marginBottom: '1rem',
 };
 
 const dropzoneStyle = {

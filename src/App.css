@@ -139,7 +139,7 @@ button:focus {
 }
 
 .scale-down {
-  transform: scale(0.80); /* Scale down the card to 80% of its original size */
+  transform: scale(); /* Scale down the card to 80% of its original size */
   transform-origin: center; /* Ensure the scaling is from the center */
 }
 
